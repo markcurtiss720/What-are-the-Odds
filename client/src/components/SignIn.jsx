@@ -11,7 +11,7 @@ import {
    
   export default function SignIn() {
     return (
-    <div className="flex mt-20 flex-col justify-center items-center">
+    <div className="flex mt-52 flex-col justify-center items-center">
       <Card className="w-96">
         <CardHeader
           variant="gradient"
@@ -37,7 +37,7 @@ import {
             Don&apos;t have an account?
             <Typography
               as="a"
-              href="#signup"
+              href="/signup"
               variant="small"
               color="blue-gray"
               className="ml-1 font-bold"

@@ -43,12 +43,11 @@ export default function Nav() {
   );
  
   return (
-    <div className="-m-6 max-h-[768px] w-[calc(100%+48px)] overflow-scroll">
       <Navbar className="fixed top-0 z-10 h-max max-w-full rounded-none px-4 py-2 lg:px-8 lg:py-4">
         <div className="flex items-center justify-between text-blue-gray-900">
           <Typography
             as="a"
-            href="#"
+            href="/"
             className="mr-4 cursor-pointer py-1.5 font-medium"
           >
             What are the Odds?
@@ -56,6 +55,7 @@ export default function Nav() {
           <div className="flex items-center gap-4">
             <div className="mr-4 hidden lg:block">{navList}</div>
             <div className="flex items-center gap-x-1">
+            <a href="/login">
               <Button
                 variant="text"
                 size="sm"
@@ -63,6 +63,8 @@ export default function Nav() {
               >
                 <span>Log In</span>
               </Button>
+            </a>
+            <a href="signup">
               <Button
                 variant="gradient"
                 size="sm"
@@ -70,6 +72,7 @@ export default function Nav() {
               >
                 <span>Sign up</span>
               </Button>
+            </a>
             </div>
             <IconButton
               variant="text"
@@ -113,15 +116,18 @@ export default function Nav() {
         <MobileNav open={openNav}>
           {navList}
           <div className="flex items-center gap-x-1">
+            <a href="/login">
             <Button fullWidth variant="text" size="sm" className="">
               <span>Log In</span>
             </Button>
+            </a>
+            <a href="/signup">
             <Button fullWidth variant="gradient" size="sm" className="">
-              <span>Sign in</span>
+              <span>Sign up</span>
             </Button>
+            </a>
           </div>
         </MobileNav>
       </Navbar>
-    </div>
   );
 }
