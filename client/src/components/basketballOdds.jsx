@@ -1,6 +1,6 @@
 // client/src/components/BasketballOdds.jsx
 import React, { useEffect, useState } from 'react';
-import { getBasketballOdds } from '../utils/api';
+import getBasketballOdds from '../utils/api';
 
 const BasketballOdds = () => {
   const [odds, setOdds] = useState([]);
@@ -11,6 +11,7 @@ const BasketballOdds = () => {
         const basketballOdds = await getBasketballOdds();
         setOdds(basketballOdds.data); // Adjust this based on the API response structure
       } catch (error) {
+        console.log(error)
         // Handle error
       }
     };
@@ -24,9 +25,9 @@ const BasketballOdds = () => {
       {/* Display odds in your component */}
       {/* Adjust the rendering based on the API response structure */}
       <ul>
-        {odds.map((odd) => (
-          <li key={odd.id}>{/* Render odds data here */}</li>
-        ))}
+        {() => {odds.map((odd) => (
+          <li key={odd.key}>{/* Render odds data here */}</li>
+        ))}}
       </ul>
     </div>
   );
