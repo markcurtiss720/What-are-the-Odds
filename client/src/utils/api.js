@@ -1,21 +1,28 @@
 import axios from 'axios';
 
-const odds_api_key = process.env.odds_key;
+
+const apiURL = "https://api.the-odds-api.com/v4/sports/?apiKey=657096347f9cea90f9f8a5b84dc4de0e"
+
+// axios.get(
+//   apiURL
+// )
+// .then(
+//   response => {
+//     console.log(response.data)
+//   }
+// )
 const getBasketballOdds = async () => {
   try {
     const response = await axios.get(
-      'https://api.the-odds-api.com/v4/sports/basketball_nba/odds',
-      {
-        params: {
-          apiKey: odds_api_key, // Use 'apiKey' as the parameter name
-        },
-      }
+      apiURL
     );
+    console.log(response.data);
     return response.data;
+    
   } catch (error) {
     console.error('Error fetching basketball odds:', error);
     throw error;
   }
 };
 
-export default getBasketballOdds
+export default getBasketballOdds;
