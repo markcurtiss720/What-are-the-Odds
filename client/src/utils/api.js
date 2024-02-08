@@ -1,13 +1,13 @@
 import axios from 'axios';
 
-const odds_api_key = process.env.odds_key
-export const getBasketballOdds = async () => {
+const odds_api_key = process.env.odds_key;
+const getBasketballOdds = async () => {
   try {
     const response = await axios.get(
       'https://api.the-odds-api.com/v4/sports/basketball_nba/odds',
       {
         params: {
-            odds_api_key, 
+          apiKey: odds_api_key, // Use 'apiKey' as the parameter name
         },
       }
     );
@@ -17,3 +17,5 @@ export const getBasketballOdds = async () => {
     throw error;
   }
 };
+
+export default getBasketballOdds
