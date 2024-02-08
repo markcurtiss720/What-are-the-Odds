@@ -1,4 +1,13 @@
 const typeDefs = `
+
+type ExternalData {
+        key: String
+    }
+
+type Query {
+        externalData: [ExternalData]!
+    }
+        
 type User {
         _id: ID
         username: string
