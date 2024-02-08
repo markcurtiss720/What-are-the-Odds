@@ -8,7 +8,7 @@ import App from './App.jsx';
 import Home from './pages/Home.jsx';
 import LogIn from './pages/LogIn.jsx'
 import Register from './pages/Register.jsx';
-
+import Account from './pages/Account.jsx';
 
 
 const router = createBrowserRouter([
@@ -27,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: '/signup',
         element: <Register/>
+      },
+      {
+        path: '/account',
+        element: <Account/>
       }
     ]
   }

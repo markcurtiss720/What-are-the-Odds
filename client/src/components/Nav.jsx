@@ -35,7 +35,7 @@ export default function Nav() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center">
+        <a href="/account" className="flex items-center">
           Account
         </a>
       </Typography>
