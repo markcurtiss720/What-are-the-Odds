@@ -1,4 +1,4 @@
-// client/src/components/BasketballOdds.js
+// client/src/components/BasketballOdds.jsx
 import React, { useEffect, useState } from 'react';
 import { getBasketballOdds } from '../utils/api';
 
