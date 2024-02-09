@@ -11,42 +11,7 @@ return response.data;
     console.error('it looks like collin messed up this code, sorry', error);
     throw error;
   }
-
-
-
-
-// .then(
-//   (response) => {
-//     console.log("testing response ")
-//     console.log(response.data)
-//     return response.data
-//   }
-  
-// );
 }
 
-
-// axios.get(
-//   apiURL
-// )
-// .then(
-//   response => {
-//     console.log(response.data)
-//   }
-// )
-
-// const getBasketballOdds = async () => {
-//   try {
-//     const response = await axios.get(
-//       apiURL
-//     );
-//     console.log(response.data);
-//     return response.data;
-    
-//   } catch (error) {
-//     console.error('Error fetching basketball odds:', error);
-//     throw error;
-//   }
-// };
 
 export default getBasketballOdds;

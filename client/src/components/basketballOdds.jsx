@@ -14,22 +14,8 @@ const BasketballOdds = () => {
     setOdds(data);
   };
 
-
-
 useEffect(() => {
   searchOdds('basketball');
-
-
-    //   try {
-    //     const basketballOdds = await getBasketballOdds();
-    //     setOdds(basketballOdds.data); // Adjust this based on the API response structure
-    //   } catch (error) {
-    //     console.log(error)
-    //     // Handle error
-    //   }
-    // };
-
-    // fetchBasketballOdds();
   }, []);
 
   return (
