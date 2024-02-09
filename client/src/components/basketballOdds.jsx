@@ -8,8 +8,10 @@ const BasketballOdds = () => {
   const [odds, setOdds] = useState([]);
 
   const searchOdds = async (query) => {
-    const { data } = await getBasketballOdds(query);
-    setOdds(data.data);
+    const data = await getBasketballOdds(query);
+    console.log("testing data")
+    console.log(data)
+    setOdds(data);
   };
 
 
