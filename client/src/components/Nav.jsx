@@ -26,18 +26,8 @@ export default function Nav() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center">
-          Odds
-        </a>
-      </Typography>
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-normal"
-      >
-        <a href="/account" className="flex items-center">
-          Account
+        <a href="/account" className="flex items-center font-bold">
+          My Account
         </a>
       </Typography>
     </ul>
@@ -51,7 +41,7 @@ export default function Nav() {
             href="/"
             className="mr-4 cursor-pointer py-1.5 font-medium"
           >
-            What are the Odds?
+            🤑 What are the Odds?
           </Typography>
           <div className="flex items-center gap-4">
             <div className="mr-4 hidden lg:block">{navList}</div>

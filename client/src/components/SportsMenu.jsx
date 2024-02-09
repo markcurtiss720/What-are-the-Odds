@@ -9,7 +9,6 @@ import {
 } from "@material-tailwind/react";
  
 export default function SportsMenu() {
-  const [openMenus, setOpenMenus] = React.useState({});
 
   const sports = [
     { name: 'Football', leagues: [
@@ -21,11 +20,19 @@ export default function SportsMenu() {
     { name: 'Basketball', leagues: [
         { name: 'NBA', query_key: 'basketball_nba' },
         { name: 'NCAA Basketball', query_key: 'basketball_ncaab' },
+        { name: 'Euroleague', query_key: 'basketball_euroleague'}
     ]},
     { name: 'Cricket', query_key: 'cricket_test_match' },
     { name: 'NHL', query_key: 'icehockey_nhl' },
     { name: 'MMA', query_key: 'mma_mixed_martial_arts' },
+    { name: 'Boxing', query_key: 'boxing_boxing'},
     { name: 'NRL Rugby', query_key: 'rugbyleague_nrl' },
+    { name: 'Golf', leagues: [
+        { name: 'The Masters', query_key: 'golf_masters_tournament_winner'},
+        { name: 'PGA Championship', query_key: 'golf_pga_championship_winner'},
+        { name: 'The Open', query_key: 'golf_the_open_championship_winner'},
+        { name: 'US Open', query_key: 'golf_us_open_winner'}
+    ]},
     { name: 'Soccer', leagues: [
         { name: 'English Premier League', query_key: 'soccer_epl' },
         { name: 'Brazil Série A', query_key: 'soccer_brazil_campeonato' },
@@ -33,53 +40,50 @@ export default function SportsMenu() {
         { name: 'Ligue 1 - France', query_key: 'soccer_france_ligue_one' },
         { name: 'Bundesliga - Germany', query_key: 'soccer_germany_bundesliga' },
         { name: 'Serie A - Italy', query_key: 'soccer_italy_serie_a' },
-        { name: 'MLS', query_key: 'soccer_usa_mls' }
+        { name: 'MLS', query_key: 'soccer_usa_mls' },
+        { name: 'UEFA Champions League', query_key: 'soccer_uefa_champs_league'},
+        { name: 'UEFA Europa League', query_key: 'soccer_uefa_europa_league'}
     ]}
 ];
 
-const handleMenuToggle = (index) => {
-    setOpenMenus(prevState => ({
-      ...prevState,
-      [index]: !prevState[index]
-    }));
-  };
-
- 
   return (
     <Menu>
       <MenuHandler>
-        <Button>Menu</Button>
+        <Button variant="text"> View Sports                        
+        <ChevronUpIcon
+            strokeWidth={2.5}
+            className={`inline ml-2 mb-1 h-3.5 w-3.5 transition-transform rotate-180`}
+        />
+        </Button>
       </MenuHandler>
       <MenuList>
-        {sports.map((sport, index) => (
-          <React.Fragment key={index} className=''>
-            <MenuItem onClick={() => handleMenuToggle(index)}>
-              {sport.name}
-              {sport.leagues && (
-                <ChevronUpIcon
-                  strokeWidth={2.5}
-                  className={`h-3.5 w-3.5 transition-transform ${
-                    openMenus[index] ? "rotate-90" : ""
-                  }`}
-                />
-              )}
-            </MenuItem>
-            {sport.leagues && openMenus[index] && (
-              <Menu
-                placement="right-start"
-                open={openMenus[index]}
-                handler={() => handleMenuToggle(index)}
-                allowHover
-                offset={15}
-              >
-                <MenuList>
-                  {sport.leagues.map((league, leagueIndex) => (
-                    <MenuItem key={leagueIndex}>{league.name}</MenuItem>
-                  ))}
-                </MenuList>
-              </Menu>
+      {sports.map((sport, index) => (
+        <React.Fragment key={index}>
+            {!sport.leagues && (
+            <MenuItem>{sport.name}</MenuItem>
             )}
-          </React.Fragment>
+            {sport.leagues && (
+            <Menu
+                placement="right-start"
+                offset={15}
+            >
+                <MenuHandler className="flex items-center justify-between">
+                    <MenuItem>
+                        {sport.name}
+                        <ChevronUpIcon
+                        strokeWidth={2.5}
+                        className={`h-3.5 w-3.5 transition-transform rotate-90`}
+                        />
+                    </MenuItem>
+                </MenuHandler>
+                <MenuList>
+                    {sport.leagues.map((league, index) => (
+                    <MenuItem key={index}>{league.name}</MenuItem>
+                    ))}
+                </MenuList>
+            </Menu>
+            )}
+        </React.Fragment>
         ))}
       </MenuList>
     </Menu>
