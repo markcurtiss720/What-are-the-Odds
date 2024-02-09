@@ -1,14 +1,11 @@
-// const mongoose = require('mongoose');
+const { Schema, model } = require('mongoose');
 
-// const { Schema } = mongoose;
+const favoriteSchema = new Schema({
+  name: {
+    type: String,
+    required: true
+  }
+});
+const Favorite = model('Favorite', favoriteSchema);
 
-// const favoriteSchema = new Schema({
-//   name: {
-//     type: String,
-//     required: true
-//   }
-// });
-
-// const Favorite = mongoose.model('Favorite', favoriteSchema);
-
-// module.exports = Favorite;
+module.exports = Favorite;

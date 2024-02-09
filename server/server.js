@@ -1,18 +1,15 @@
 const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
-const UserModel = require('./models/User');
 const { ApolloServer } = require('@apollo/server');
 const { expressMiddleware } = require('@apollo/server/express4');
+const path = require('path')
 const PORT = 3000;
 const { typeDefs, resolvers } = require('./schemas');
+const db = require('./config/connection');
 
 // Import exampleRoute
 // const exampleRoute = require('./api/exampleRoute');
 
 const app = express();
-app.use(express.json());
-app.use(cors());
 
 // mongoose.connect("mongodb://127.0.0.1:27017/Odds");
 
@@ -66,11 +63,13 @@ const server = new ApolloServer({
   
     app.use('/graphql', expressMiddleware(server));
   
+
+  db.once('open', () => {
     app.listen(PORT, () => {
       console.log(`API server running on port ${PORT}!`);
       console.log(`Use GraphQL at http://localhost:${PORT}/graphql`);
     });
-  };
-  
+  });
+}
   // Call the async function to start the server
   startApolloServer();
