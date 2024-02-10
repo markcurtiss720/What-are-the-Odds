@@ -1,68 +1,37 @@
-const express = require("express");
+const express = require('express');
 const { ApolloServer } = require('@apollo/server');
 const { expressMiddleware } = require('@apollo/server/express4');
-const path = require('path')
-const PORT = 3000;
+const path = require('path');
+const { authMiddleware } = require('./utils/auth');
+
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
 
-// Import exampleRoute
-// const exampleRoute = require('./api/exampleRoute');
-
+const PORT = process.env.PORT || 3001;
 const app = express();
-
-// mongoose.connect("mongodb://127.0.0.1:27017/Odds");
-
-// // // Set up routes
-// // app.use('/api', exampleRoute); // Mount exampleRoute under /api
-
-// app.post('/login', (req, res) => {
-//     const { email, password } = req.body;
-//     UserModel.findOne({ email: email })
-//     .then(user => {
-//         if (user) {
-//             if (user.password === password) {
-//                 res.json("Success");
-//             } else {
-//                 res.json("Incorrect password");
-//             }
-//         } else {
-//             res.json("No record existed");
-//         }
-//     })
-//     .catch(err => {
-//         console.error(err);
-//         res.status(500).json({ error: "Internal server error" });
-//     });
-// });
-
-// app.post('/signup', (req, res) => {
-//     UserModel.create(req.body)
-//     .then(employees => res.json(employees))
-//     .catch(err => {
-//         console.error(err);
-//         res.status(500).json({ error: "Internal server error" });
-//     });
-// });
-
-// app.listen(3002, () => {
-//     console.log("server is running");
-// });
-
 const server = new ApolloServer({
-    typeDefs,
-    resolvers,
-  });
-  
-  // Create a new instance of an Apollo server with the GraphQL schema
-  const startApolloServer = async () => {
-    await server.start();
-  
-    app.use(express.urlencoded({ extended: false }));
-    app.use(express.json());
-  
-    app.use('/graphql', expressMiddleware(server));
-  
+  typeDefs,
+  resolvers,
+});
+
+// Create a new instance of an Apollo server with the GraphQL schema
+const startApolloServer = async () => {
+  await server.start();
+
+  app.use(express.urlencoded({ extended: false }));
+  app.use(express.json());
+
+  app.use('/graphql', expressMiddleware(server, {
+    context: authMiddleware
+  }));
+
+  if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '../client/dist')));
+
+    app.get('*', (req, res) => {
+      res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+    });
+  }
 
   db.once('open', () => {
     app.listen(PORT, () => {
@@ -70,6 +39,7 @@ const server = new ApolloServer({
       console.log(`Use GraphQL at http://localhost:${PORT}/graphql`);
     });
   });
-}
-  // Call the async function to start the server
+};
+
+// Call the async function to start the server
   startApolloServer();
