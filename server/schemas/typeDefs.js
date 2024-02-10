@@ -20,19 +20,9 @@ const typeDefs = `
     thoughts: [Thought]!
   }
 
-  type Thought {
+  type Favorite {
     _id: ID
-    thoughtText: String
-    thoughtAuthor: String
-    createdAt: String
-    comments: [Comment]!
-  }
-
-  type Comment {
-    _id: ID
-    commentText: String
-    commentAuthor: String
-    createdAt: String
+    name: String
   }
 
   type Auth {
@@ -43,21 +33,15 @@ const typeDefs = `
   type Query {
     users: [User]
     user(username: String!): User
-    thoughts(username: String): [Thought]
-    thought(thoughtId: ID!): Thought
+    favorites(username: String): [Favorite]
+    favorite(favoriteId: ID!): Favorite
   }
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    addThought(thoughtText: String!, thoughtAuthor: String!): Thought
-    addComment(
-      thoughtId: ID!
-      commentText: String!
-      commentAuthor: String!
-    ): Thought
-    removeThought(thoughtId: ID!): Thought
-    removeComment(thoughtId: ID!, commentId: ID!): Thought
+    addFavorite(name!): Favorite
+    removeFavorite(favoriteId: ID!): Favorite
   }
 `;
 
