@@ -17,7 +17,10 @@ const typeDefs = `
     username: String
     email: String
     password: String
-    thoughts: [Thought]!
+  }
+
+  type ExternalData {
+    key: String
   }
 
   type Favorite {
@@ -35,12 +38,13 @@ const typeDefs = `
     user(username: String!): User
     favorites(username: String): [Favorite]
     favorite(favoriteId: ID!): Favorite
+    externalData: [ExternalData]!
   }
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    addFavorite(name!): Favorite
+    addFavorite(name: String!): Favorite
     removeFavorite(favoriteId: ID!): Favorite
   }
 `;
