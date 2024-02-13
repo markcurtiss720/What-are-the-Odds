@@ -19,6 +19,10 @@ export default function LeaguePage() {
           });
       }, [queryKey]);
 
+    const handleEventClick = (sport, game) => {
+        window.location.href = `/league/${sport}/${game}`
+    }
+
     return (
         <div className="flex flex-col mt-32 justify-center items-center">
         <Typography variant="h1" className="mb-4">Events:</Typography>
@@ -26,7 +30,7 @@ export default function LeaguePage() {
         <Card className="w-96 mt-4">
           <List>
             {leagueData.map((item, index) => (
-                <ListItem key={index}>
+                <ListItem key={index} onClick={() => handleEventClick(item.sport_key, item.id)}>
                     {item.away_team} vs. {item.home_team}
                 </ListItem>
             ))}
