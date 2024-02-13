@@ -2,13 +2,13 @@
 import React, { useEffect, useState } from 'react';
 import ResultList from './ResultsList';
 
-import getBasketballOdds from '../utils/api';
+import getOdds from '../utils/api';
 
 const BasketballOdds = () => {
   const [odds, setOdds] = useState([]);
 
   const searchOdds = async (query) => {
-    const data = await getBasketballOdds(query);
+    const data = await getOdds(query);
     console.log("testing data")
     console.log(data)
     setOdds(data);

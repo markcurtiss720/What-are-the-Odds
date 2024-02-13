@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {  ChevronUpIcon } from "@heroicons/react/24/solid";
 import {
   Menu,
@@ -7,8 +7,25 @@ import {
   MenuItem,
   Button,
 } from "@material-tailwind/react";
+
+import getOdds from '../utils/api';
  
 export default function SportsMenu() {
+
+  const [odds, setOdds] = useState([]);
+
+  const [selectedSport, setSelectedSport] = useState(null);
+  const [leagues, setLeagues] = useState([]);
+
+  const handleSportClick = async (query) => {
+    console.log(query)
+    const data = await getOdds(query);
+    console.log("Testing Menu Data========================")
+    console.log(data)
+    setOdds(data);
+  }
+
+
 
   const sports = [
     { name: 'Football', leagues: [
@@ -60,7 +77,7 @@ export default function SportsMenu() {
       {sports.map((sport, index) => (
         <React.Fragment key={index}>
             {!sport.leagues && (
-            <MenuItem>{sport.name}</MenuItem>
+            <MenuItem onClick={() => handleSportClick(sport.query_key)}>{sport.name}</MenuItem>
             )}
             {sport.leagues && (
             <Menu
@@ -78,7 +95,7 @@ export default function SportsMenu() {
                 </MenuHandler>
                 <MenuList>
                     {sport.leagues.map((league, index) => (
-                    <MenuItem key={index}>{league.name}</MenuItem>
+                    <MenuItem key={index} onClick={() => handleSportClick(league.query_key)}>{league.name}</MenuItem>
                     ))}
                 </MenuList>
             </Menu>
