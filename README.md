@@ -10,12 +10,13 @@
 - [Links](#Links)
 - [Questions](#Questions)
 - [License](#License)
+- [Screenshots](#Screenshots)
 
 ##
 
 ## Description
 
-
+Your one stop shop for finding ALL of the odds for your favorite basketball games, all in one place! Whether you want to see the lines from Vegas' big sportsbooks like Ceasars or MGM, or an online sportsbook like Fanduel or Draftkings, you can find and compare odds to be most informed bettor possible with What are the Odds.
 
 ## Installation
 
@@ -44,7 +45,7 @@ npm run develop
 
 ## Links
 
-
+(-----Render Link-----)
 
 ## Built With
 
@@ -75,3 +76,19 @@ npm run develop
 ## License
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) This project is covered under the MIT License.
+
+## Screenshots
+
+- Home
+
+![alt text](client/src/assets/img/Home.png)
+
+
+- Sign Up
+
+![alt text](client/src/assets/img/SignUp.png)
+
+
+- Log In
+
+![alt text](client/src/assets/img/LogIn.png)
