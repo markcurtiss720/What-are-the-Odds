@@ -10,6 +10,7 @@ import LogIn from './pages/LogIn.jsx'
 import Register from './pages/Register.jsx';
 import Account from './pages/Account.jsx';
 import LeaguePage from './pages/LeaguePage';
+import EventPage from './pages/EventPage.jsx';
 
 
 const router = createBrowserRouter([
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: '/league/:queryKey',
         element: <LeaguePage/>
+      },
+      {
+        path: 'league/:queryKey/:eventId',
+        element: <EventPage/>
       }
     ]
   }
