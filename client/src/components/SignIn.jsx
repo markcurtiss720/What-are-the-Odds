@@ -19,7 +19,6 @@ import {
 
     const handleFormSubmit = async (event) => {
       event.preventDefault();
-      console.log("woah nice submit")
       try {
         const mutationResponse = await SignIn({
           variables: { email: formState.email, password: formState.password },

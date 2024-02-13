@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
     Typography,
     Card,
@@ -11,8 +11,30 @@ import {
     IconButton,
  } from "@material-tailwind/react";
  import TrashIcon from '../components/TrashIcon';
+ import Auth from '../utils/auth';
+
 
 const Account = () => {
+
+const [user, setUser] = useState('')
+
+useEffect(() => {
+    const fetchUser = async () => {
+        try{
+            const userProfile = Auth.getProfile();
+            setUser(userProfile.data)
+            console.log(userProfile.data)
+        } catch (error) {
+            console.error('Error fetching user profile:', error);
+        }
+    }
+
+    fetchUser();
+
+}, []);
+
+
+
     return (
         <div className='mt-32'>
             <Typography 
@@ -25,7 +47,7 @@ const Account = () => {
                 <Card className="mt-6 w-96 md:w-3/4">
                     <CardBody>
                         <Typography variant="h5" color="blue-gray" className="mb-2">
-                        Welcome, John Smith!
+                        Welcome, {user.username}!
                         </Typography>
                         <Typography variant='h6' className='mt-12'>
                             My Favorites:
