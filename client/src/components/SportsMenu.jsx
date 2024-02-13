@@ -18,11 +18,7 @@ export default function SportsMenu() {
   const [leagues, setLeagues] = useState([]);
 
   const handleSportClick = async (query) => {
-    console.log(query)
-    const data = await getOdds(query);
-    console.log("Testing Menu Data========================")
-    console.log(data)
-    setOdds(data);
+    location.href()
   }
 
 
