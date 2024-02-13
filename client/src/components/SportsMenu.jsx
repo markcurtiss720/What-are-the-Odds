@@ -18,7 +18,7 @@ export default function SportsMenu() {
   const [leagues, setLeagues] = useState([]);
 
   const handleSportClick = async (query) => {
-    location.href()
+    window.location.href = `/league/${query}`;
   }
 
 
