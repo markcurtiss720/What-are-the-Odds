@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-const getBasketballOdds = async (query) => {
+const getOdds = async (query) => {
   try {
 const response = await axios.get(`https://api.the-odds-api.com/v4/sports/${query}/odds/?apiKey=657096347f9cea90f9f8a5b84dc4de0e&regions=us&markets=h2h`)
 console.log("testing response");
@@ -14,4 +14,4 @@ return response.data;
 }
 
 
-export default getBasketballOdds;
+export default getOdds;

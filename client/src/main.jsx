@@ -9,6 +9,7 @@ import Home from './pages/Home.jsx';
 import LogIn from './pages/LogIn.jsx'
 import Register from './pages/Register.jsx';
 import Account from './pages/Account.jsx';
+import LeaguePage from './pages/LeaguePage';
 
 
 const router = createBrowserRouter([
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: '/account',
         element: <Account/>
+      },
+      {
+        path: '/league/:queryKey',
+        element: <LeaguePage/>
       }
     ]
   }
