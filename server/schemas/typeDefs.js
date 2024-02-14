@@ -27,6 +27,8 @@ const typeDefs = `
   type Favorite {
     _id: ID
     name: String
+    eventName: String
+    sportKey: String
   }
 
   type Auth {
@@ -45,7 +47,7 @@ const typeDefs = `
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    addFavorite(name: String!, username: String!): Favorite
+    addFavorite(name: String!, eventName: String!, sportKey: String!, username: String!): Favorite
     removeFavorite(favoriteId: ID!): Favorite
   }
 `;

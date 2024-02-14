@@ -5,6 +5,14 @@ const favoriteSchema = new Schema({
     type: String,
     required: true,
   },
+  eventName: {
+    type: String,
+    required: true,
+  },
+  sportKey: {
+    type: String,
+    required: true,
+  }
 });
 
 const Favorite = model('favorite', favoriteSchema);

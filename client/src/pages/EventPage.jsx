@@ -4,7 +4,6 @@ import getEventOdds from "../utils/getEventOdds";
 import { List, ListItem, Card, Typography, Button } from "@material-tailwind/react";
 import { useMutation, useQuery } from '@apollo/client';
 import { ADD_FAVORITE } from '../utils/mutations';
-import { GET_USER } from "../utils/queries";
 import Auth from "../utils/auth";
 
 
@@ -12,6 +11,8 @@ export default function EventPage() {
     const { queryKey, eventId } = useParams();
     const [leagueData, setLeagueData] = useState([]);
     const [bookmakers, setBookmakers] = useState([]);
+    const [eventName, setEventName] = useState('');
+    const [sportKey, setSportKey] = useState('');
 
     useEffect(() => {
         getEventOdds(queryKey, eventId)
@@ -20,6 +21,10 @@ export default function EventPage() {
             setLeagueData(data);
             setBookmakers(data.bookmakers)
             console.log(leagueData);
+            const match = `${data.away_team} vs. ${data.home_team}`
+            setEventName(match);
+            setSportKey(data.sport_key);
+            console.log(eventName);
           })
           .catch(error => {
             console.error("Error fetching league data:", error);
@@ -28,7 +33,6 @@ export default function EventPage() {
   
       // Inside your component
       const [addFavorite] = useMutation(ADD_FAVORITE);
-      const { data: userData } = useQuery(GET_USER);
 
       const [user, setUser] = useState('')
 
@@ -56,7 +60,7 @@ export default function EventPage() {
             return;
           }
           const { data } = await addFavorite({
-            variables: { name, username },
+            variables: { name, eventName: eventName, sportKey: sportKey, username },
           });
           console.log('Favorite added:', data.addFavorite);
           // Optionally, update local state or show a success message.
@@ -68,12 +72,12 @@ export default function EventPage() {
 
     return (
         <div className="flex flex-col mt-32 justify-center items-center">
-        <Typography variant="h1" className="mb-4">{leagueData.away_team} vs. {leagueData.home_team}</Typography>
+        <Typography variant="h1" className="mb-4">{eventName}</Typography>
         <Button onClick={() => handleAddFavorite(eventId)}>Favorite This Event</Button>
         <Card className="w-96 mt-4">
           <List>
             {bookmakers.map((item, index) => (
-                <ListItem key={index}>
+                <ListItem className="font-bold flex justify-between" key={index}>
                     {item.title}
                     {item.markets && (
                         <List>
@@ -82,7 +86,7 @@ export default function EventPage() {
                                     {market.outcomes && (
                                         <div>
                                             {market.outcomes.map((outcome, subSubindex) => (
-                                                <p key={subSubindex}>{outcome.name}: {outcome.price}</p>
+                                                <p key={subSubindex}>{outcome.name}:  {outcome.price}</p>
                                             ))}
                                         </div>
                                     )}

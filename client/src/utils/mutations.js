@@ -31,10 +31,21 @@ export const ADD_USER = gql`
 `;
 
 export const ADD_FAVORITE= gql`
-  mutation addFavorite($name: String!, $username: String!) {
-    addFavorite(name: $name, username: $username) {
+  mutation addFavorite($name: String!, $eventName: String!, $sportKey: String!, $username: String!) {
+    addFavorite(name: $name, eventName: $eventName, sportKey: $sportKey, username: $username) {
       _id
       name
+      eventName
+      sportKey
     }
   }
 `;
+
+export const REMOVE_FAVORITE = gql`
+mutation removeFavorite($favoriteId: ID!) {
+  removeFavorite(favoriteId: $favoriteId) {
+    name
+    _id
+  }
+}
+`
