@@ -67,14 +67,14 @@ const resolvers = {
 
       return { token, user };
     },
-    addFavorite: async (parent, { name, username }) => {
+    addFavorite: async (parent, { name, eventName, sportKey, username }) => {
       const user = await User.findOne({ username });
 
       if (!user) {
         throw new Error('User not found');
       }
 
-      const favorite = await Favorite.create({ name });
+      const favorite = await Favorite.create({ name, eventName, sportKey });
       user.favorites.push(favorite._id);
       await user.save();
       return favorite;

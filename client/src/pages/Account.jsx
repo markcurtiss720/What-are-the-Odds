@@ -12,11 +12,15 @@ import {
  } from "@material-tailwind/react";
  import TrashIcon from '../components/TrashIcon';
  import Auth from '../utils/auth';
+ import { useMutation, useQuery } from '@apollo/client';
+ import { GET_USER } from '../utils/queries';
+ import { REMOVE_FAVORITE } from '../utils/mutations';
 
 
 const Account = () => {
 
 const [user, setUser] = useState('')
+const [favorites, setFavorites] = useState([])
 
 useEffect(() => {
     const fetchUser = async () => {
@@ -33,7 +37,36 @@ useEffect(() => {
 
 }, []);
 
+const { loading, error, data } = useQuery(GET_USER, {
+    variables: { username: user.username },
+});
 
+useEffect(() => {
+    if (!loading && !error) {
+        setFavorites(data.user.favorites);
+        console.log(data.user.favorites)
+        console.log(favorites);
+    }
+}, [loading, error, data]);
+
+const handleFavoriteClick = (sport, game) => {
+    window.location.href = `/league/${sport}/${game}`
+}
+
+const [removeFavorite] = useMutation(REMOVE_FAVORITE);
+
+const handleDeleteFavorite = async (id) => {
+    try {
+        const { data } = await removeFavorite({
+            variables: { favoriteId: id }
+        })
+        console.log('Favorite removed:', data.removeFavorite)
+        location.reload()
+    } catch (error) {
+        console.error('Error deleting favorite');
+        throw error;
+    }
+}
 
     return (
         <div className='mt-32'>
@@ -55,30 +88,20 @@ useEffect(() => {
                     </CardBody>
                     <CardFooter className="pt-0">
                         <List>
-                            <ListItem ripple={false} className="py-1 pr-1 pl-4">
-                            Item One
-                            <ListItemSuffix>
-                                <IconButton variant="text" color="blue-gray">
-                                <TrashIcon />
-                                </IconButton>
-                            </ListItemSuffix>
-                            </ListItem>
-                            <ListItem ripple={false} className="py-1 pr-1 pl-4">
-                            Item Two
-                            <ListItemSuffix>
-                                <IconButton variant="text" color="blue-gray">
-                                <TrashIcon />
-                                </IconButton>
-                            </ListItemSuffix>
-                            </ListItem>
-                            <ListItem ripple={false} className="py-1 pr-1 pl-4">
-                            Item Three
-                            <ListItemSuffix>
-                                <IconButton variant="text" color="blue-gray">
-                                <TrashIcon />
-                                </IconButton>
-                            </ListItemSuffix>
-                            </ListItem>
+                            {favorites.map((favorite, index) => (
+                                <div key={index} className='flex'>
+                                    <ListItem  
+                                    ripple={false} 
+                                    className="py-1 pr-1 pl-4"
+                                    onClick={() => handleFavoriteClick(favorite.sportKey, favorite.name)}
+                                    >
+                                    {favorite.eventName}
+                                    </ListItem>
+                                    <IconButton onClick={() => handleDeleteFavorite(favorite._id)} variant="text" color="blue-gray">
+                                    <TrashIcon />
+                                    </IconButton>
+                                </div>
+                            ))}
                         </List>
                     </CardFooter>
                 </Card>

@@ -23,6 +23,15 @@ export default function LeaguePage() {
         window.location.href = `/league/${sport}/${game}`
     }
 
+    const parseDate = (dateString) => {
+      const date = new Date(dateString);
+      const year = date.getFullYear();
+      const month = date.getMonth() + 1; // Note: getMonth() returns zero-based month
+      const day = date.getDate(); 
+      return `${month}/${day}/${year}`
+    };
+
+
     return (
         <div className="flex flex-col mt-32 justify-center items-center">
         <Typography variant="h1" className="mb-4">Events:</Typography>
@@ -30,8 +39,13 @@ export default function LeaguePage() {
         <Card className="w-96 mt-4">
           <List>
             {leagueData.map((item, index) => (
-                <ListItem key={index} onClick={() => handleEventClick(item.sport_key, item.id)}>
+                <ListItem
+                className="flex flex-col items-start justify-around font-bold"
+                key={index} 
+                onClick={() => handleEventClick(item.sport_key, item.id)}
+                >
                     {item.away_team} vs. {item.home_team}
+                    <p className="font-normal">{parseDate(item.commence_time)}</p>
                 </ListItem>
             ))}
           </List>
