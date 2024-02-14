@@ -17,6 +17,7 @@ const typeDefs = `
     username: String
     email: String
     password: String
+    favorites: [Favorite]
   }
 
   type ExternalData {
@@ -36,7 +37,7 @@ const typeDefs = `
   type Query {
     users: [User]
     user(username: String!): User
-    favorites(username: String): [Favorite]
+    favorites(username: String!): [Favorite]
     favorite(favoriteId: ID!): Favorite
     externalData: [ExternalData]!
   }
@@ -44,7 +45,7 @@ const typeDefs = `
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    addFavorite(name: String!): Favorite
+    addFavorite(name: String!, username: String!): Favorite
     removeFavorite(favoriteId: ID!): Favorite
   }
 `;

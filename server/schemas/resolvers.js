@@ -13,9 +13,8 @@ const resolvers = {
       return User.findOne({ username }).populate('favorites');
     },
 
-    favorite: async (parent, { username }) => {
-      const params = username ? { username } : {};
-      return Favorite.find(params).sort({ createdAt: -1 });
+    favorites: async (parent, { username }) => {
+      return Favorite.find();
     },
 
     favorite: async (parent, { favoriteId }) => {
@@ -68,14 +67,16 @@ const resolvers = {
 
       return { token, user };
     },
-    addFavorite: async (parent, { name }) => {
+    addFavorite: async (parent, { name, username }) => {
+      const user = await User.findOne({ username });
+
+      if (!user) {
+        throw new Error('User not found');
+      }
+
       const favorite = await Favorite.create({ name });
-
-      await User.findOneAndUpdate(
-      { username: name },
-        { $addToSet: { favorites: favorite._id } }
-      );
-
+      user.favorites.push(favorite._id);
+      await user.save();
       return favorite;
     },
     removeFavorite: async (parent, { favoriteId }) => {
