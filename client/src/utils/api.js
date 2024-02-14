@@ -12,6 +12,5 @@ const getOdds = async (query) => {
     throw error;
   }
 }
-1
 
 export default getOdds;

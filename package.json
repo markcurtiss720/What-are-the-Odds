@@ -5,7 +5,7 @@
   "main": "server/server.js",
   "scripts": {
     "start": "node server --ignore client",
-    "develop": "concurrently \"cd server && npm run start\" \"cd client && npm run dev\"",
+    "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm run dev\"",
     "install": "cd server && npm i && cd ../client && npm i",
     "seed": "cd server && npm run seed",
     "build": "cd client && npm run build"
@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "axios": "^1.6.7",
-    "dateformat": "^5.0.3"
+    "dateformat": "^5.0.3",
+    "dotenv": "^16.4.4"
   }
 }

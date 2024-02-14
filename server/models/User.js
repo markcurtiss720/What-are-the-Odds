@@ -22,7 +22,7 @@ const userSchema = new Schema({
   favorites: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Favorite',
+      ref: 'favorite',
     },
   ],
 });
