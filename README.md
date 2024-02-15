@@ -18,6 +18,10 @@
 
 Your one stop shop for finding ALL of the odds for your favorite basketball games, all in one place! Whether you want to see the lines from Vegas' big sportsbooks like Ceasars or MGM, or an online sportsbook like Fanduel or Draftkings, you can find and compare odds to be most informed bettor possible with What are the Odds.
 
+## Deployed Site Link
+
+https://what-are-the-odds-xv5j.onrender.com/
+
 ## Installation
 
 1. To install application, clone the main project via the HTTP or SSH link on github.
